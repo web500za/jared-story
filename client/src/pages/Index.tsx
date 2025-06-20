@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import CVView from "@/components/CVView";
-import JourneyView from "@/components/JourneyView";
+import JourneyViewNew from "@/components/JourneyViewNew";
 
 const Index = () => {
   const [activeView, setActiveView] = useState<"cv" | "journey">("cv");
@@ -58,7 +58,7 @@ const Index = () => {
 
       {/* Content */}
       <div className="transition-all duration-500 ease-in-out">
-        {activeView === "cv" ? <CVView /> : <JourneyView />}
+        {activeView === "cv" ? <CVView /> : <JourneyViewNew />}
       </div>
     </div>
   );

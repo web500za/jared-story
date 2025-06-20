@@ -117,9 +117,9 @@ const CVView = () => {
                   </h3>
                   <p className="text-gray-300 text-sm mb-3">Deep understanding of full customer journey through Salesforce CRM insights, retention patterns, and proactive experience optimization</p>
                   <div className="flex flex-wrap gap-2">
-                    <Badge className="bg-night-700 text-gray-300 text-xs border border-purple-700/30">Salesforce CRM</Badge>
-                    <Badge className="bg-night-700 text-gray-300 text-xs border border-purple-700/30">Customer Retention</Badge>
-                    <Badge className="bg-night-700 text-gray-300 text-xs border border-purple-700/30">Experience Design</Badge>
+                    <Badge className="bg-blue-900/40 text-blue-200 text-xs border border-blue-700/40">Salesforce CRM</Badge>
+                    <Badge className="bg-purple-900/40 text-purple-200 text-xs border border-purple-700/40">Customer Retention</Badge>
+                    <Badge className="bg-green-900/40 text-green-200 text-xs border border-green-700/40">Experience Design</Badge>
                   </div>
                 </CardContent>
               </Card>
@@ -132,9 +132,9 @@ const CVView = () => {
                   </h3>
                   <p className="text-gray-300 text-sm mb-3">Built intelligent automation for SMBs using ChatGPT, deployed via Replit & Vercel</p>
                   <div className="flex flex-wrap gap-2">
-                    <Badge className="bg-night-700 text-gray-300 text-xs border border-purple-700/30">OpenAI API</Badge>
-                    <Badge className="bg-night-700 text-gray-300 text-xs border border-purple-700/30">Replit</Badge>
-                    <Badge className="bg-night-700 text-gray-300 text-xs border border-purple-700/30">Vercel</Badge>
+                    <Badge className="bg-orange-900/40 text-orange-200 text-xs border border-orange-700/40">OpenAI API</Badge>
+                    <Badge className="bg-green-900/40 text-green-200 text-xs border border-green-700/40">Replit</Badge>
+                    <Badge className="bg-purple-900/40 text-purple-200 text-xs border border-purple-700/40">Vercel</Badge>
                   </div>
                 </CardContent>
               </Card>
@@ -147,9 +147,9 @@ const CVView = () => {
                   </h3>
                   <p className="text-gray-300 text-sm mb-3">Created sophisticated personal workflows integrating Lovable, Figma, and deployment platforms for learning and experimentation</p>
                   <div className="flex flex-wrap gap-2">
-                    <Badge className="bg-night-700 text-gray-300 text-xs border border-purple-700/30">Lovable</Badge>
-                    <Badge className="bg-night-700 text-gray-300 text-xs border border-purple-700/30">Figma</Badge>
-                    <Badge className="bg-night-700 text-gray-300 text-xs border border-purple-700/30">API Integration</Badge>
+                    <Badge className="bg-pink-900/40 text-pink-200 text-xs border border-pink-700/40">Lovable</Badge>
+                    <Badge className="bg-blue-900/40 text-blue-200 text-xs border border-blue-700/40">Figma</Badge>
+                    <Badge className="bg-green-900/40 text-green-200 text-xs border border-green-700/40">API Integration</Badge>
                   </div>
                 </CardContent>
               </Card>
@@ -162,9 +162,9 @@ const CVView = () => {
                   </h3>
                   <p className="text-gray-300 text-sm mb-3">Designed visual certificate lifecycle maps and streamlined complex PKI processes for enterprise clients</p>
                   <div className="flex flex-wrap gap-2">
-                    <Badge className="bg-night-700 text-gray-300 text-xs border border-purple-700/30">PKI Systems</Badge>
-                    <Badge className="bg-night-700 text-gray-300 text-xs border border-purple-700/30">ACME Protocol</Badge>
-                    <Badge className="bg-night-700 text-gray-300 text-xs border border-purple-700/30">Process Design</Badge>
+                    <Badge className="bg-red-900/40 text-red-200 text-xs border border-red-700/40">PKI Systems</Badge>
+                    <Badge className="bg-blue-900/40 text-blue-200 text-xs border border-blue-700/40">ACME Protocol</Badge>
+                    <Badge className="bg-purple-900/40 text-purple-200 text-xs border border-purple-700/40">Process Design</Badge>
                   </div>
                 </CardContent>
               </Card>
@@ -179,12 +179,12 @@ const CVView = () => {
                 <CardContent className="p-6">
                   <div className="text-center">
                     <div className="text-3xl mb-4">🎯</div>
-                    <h3 className="text-xl font-semibold text-white mb-3">Creative Problem Solver & Experience Designer</h3>
+                    <h3 className="text-xl font-semibold text-white mb-3">Everything is an Experience</h3>
                     <p className="text-gray-300 leading-relaxed max-w-4xl mx-auto">
-                      Four years in customer support taught me what exceptional experiences look like — and critically, 
+                      Many years in customer support taught me what exceptional experiences look like — and critically, 
                       what below-par experiences feel like. I want to build proprietary solutions that improve products for both 
-                      front-end and back-end operations. My approach: map entire business operations like SimCity, 
-                      identify optimization points, then create creative solutions that enhance the customer experience at every touchpoint.
+                      front-end and back-end operations. My approach: create a visual map of every touchpoint in the business, 
+                      enabling a top-down view that can zoom in and out of operations to identify optimization points and enhance the customer experience.
                     </p>
                   </div>
                 </CardContent>
@@ -255,7 +255,7 @@ const CVView = () => {
                 
                 <div className="text-center flex-1">
                   <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-2">2</div>
-                  <div className="text-sm text-gray-300">Technical Success</div>
+                  <div className="text-sm text-gray-300">Product Success</div>
                   <div className="text-xs text-purple-400">Current Growth</div>
                 </div>
                 
@@ -310,7 +310,7 @@ const CVView = () => {
             <div className="p-6 bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-lg border border-purple-600/30">
               <p className="text-lg text-purple-200 italic leading-relaxed text-center">
                 "Ready to transition from supporting great products to building them. 
-                Four years of customer insights + technical skills + creative problem-solving = 
+                Many years of customer insights + technical skills + creative problem-solving = 
                 the perfect foundation for product-focused roles."
               </p>
             </div>
