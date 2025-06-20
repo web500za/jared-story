@@ -1,4 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { useState, useEffect } from "react";
 
 const JourneyViewNew = () => {
@@ -11,8 +10,8 @@ const JourneyViewNew = () => {
       title: "Tech Early Roots",
       period: "Early Years",
       description: "PS1, PS2, World of Warcraft adventures. Jailbreaking iPhones, rooting Androids. Hardware, software, internet cafés. Curiosity over conversation.",
-      elevation: 20,
-      color: "from-slate-600 to-blue-600",
+      elevation: 25,
+      color: "#4F46E5", // Indigo
       mood: "discovery"
     },
     {
@@ -20,8 +19,8 @@ const JourneyViewNew = () => {
       title: "Almost Solo Music Video",
       period: "2012",
       description: "Solo music video propels me into a cult following. Building an audience through raw creativity and authentic connection.",
-      elevation: 40,
-      color: "from-pink-600 to-purple-600",
+      elevation: 45,
+      color: "#EC4899", // Pink
       mood: "breakthrough"
     },
     {
@@ -29,8 +28,8 @@ const JourneyViewNew = () => {
       title: "Creative Peak",
       period: "2012–2017",
       description: "Music career as 'Platinum Posse.' Built audience, earned respect through creativity on Facebook, SoundCloud, and YouTube.",
-      elevation: 70,
-      color: "from-purple-600 to-pink-600",
+      elevation: 75,
+      color: "#8B5CF6", // Purple
       mood: "triumph"
     },
     {
@@ -38,8 +37,8 @@ const JourneyViewNew = () => {
       title: "Pivot from Music",
       period: "2018",
       description: "Realized music wouldn't sustain me in South Africa. Shifted focus from expression to structure — chasing stability while keeping creativity alive.",
-      elevation: 30,
-      color: "from-orange-600 to-red-600",
+      elevation: 35,
+      color: "#F97316", // Orange
       mood: "transition"
     },
     {
@@ -47,8 +46,8 @@ const JourneyViewNew = () => {
       title: "Mastery Building",
       period: "2020–2024",
       description: "5CA years. SaaS expertise, mentoring, problem-solving at scale. First wave of tech support that laid the foundation for the team structure that followed.",
-      elevation: 50,
-      color: "from-blue-600 to-purple-600",
+      elevation: 55,
+      color: "#3B82F6", // Blue
       mood: "growth"
     },
     {
@@ -56,8 +55,8 @@ const JourneyViewNew = () => {
       title: "The Breakthrough",
       period: "2024",
       description: "Started troubleshooting my brain. ADHD medication changed my life and unlocked the gift of focus. AI + no-code fusion. Building what I imagine.",
-      elevation: 80,
-      color: "from-yellow-500 to-orange-500",
+      elevation: 85,
+      color: "#F59E0B", // Amber
       mood: "transformation"
     },
     {
@@ -65,8 +64,8 @@ const JourneyViewNew = () => {
       title: "Future Forward",
       period: "Now",
       description: "Technology, creativity and customer-facing work combine in this breakthrough era of no-code + solution engineering. Creating human-centered AI tools.",
-      elevation: 90,
-      color: "from-green-500 to-blue-500",
+      elevation: 95,
+      color: "#10B981", // Emerald
       mood: "aspiration"
     }
   ];
@@ -78,7 +77,7 @@ const JourneyViewNew = () => {
       const progress = Math.min(scrollTop / docHeight, 1);
       setScrollProgress(progress);
       
-      const stepIndex = Math.floor(progress * (journeySteps.length - 1));
+      const stepIndex = Math.floor(progress * journeySteps.length);
       setCurrentStep(Math.min(stepIndex, journeySteps.length - 1));
     };
 
@@ -86,149 +85,202 @@ const JourneyViewNew = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [journeySteps.length]);
 
-  const getMoodAnimation = (mood: string) => {
-    switch (mood) {
-      case 'discovery': return 'animate-pulse';
-      case 'breakthrough': return 'animate-bounce';
-      case 'triumph': return 'animate-ping';
-      case 'transition': return 'animate-pulse';
-      case 'growth': return 'animate-pulse';
-      case 'transformation': return 'animate-bounce';
-      case 'aspiration': return 'animate-float';
-      default: return '';
-    }
+  // Generate random stars
+  const generateStars = (count: number) => {
+    return Array.from({ length: count }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 60,
+      size: Math.random() * 2 + 1,
+      opacity: Math.random() * 0.8 + 0.2,
+      twinkleDelay: Math.random() * 3
+    }));
   };
 
+  const stars = generateStars(100);
+
   return (
-    <div className="min-h-[500vh] relative">
-      {/* Fixed Mountain Range Background */}
-      <div className="fixed inset-0 z-0">
+    <div className="min-h-[500vh] relative overflow-hidden">
+      {/* Night Sky Background */}
+      <div className="fixed inset-0 z-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+        {/* Stars */}
+        {stars.map((star) => (
+          <div
+            key={star.id}
+            className="absolute rounded-full bg-white"
+            style={{
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              opacity: star.opacity,
+              animation: `twinkle 3s ease-in-out infinite ${star.twinkleDelay}s`
+            }}
+          />
+        ))}
+        
+        {/* Shooting stars */}
+        <div className="shooting-star" style={{ animationDelay: '2s' }} />
+        <div className="shooting-star" style={{ animationDelay: '8s' }} />
+        <div className="shooting-star" style={{ animationDelay: '15s' }} />
+      </div>
+
+      {/* Mountain Range */}
+      <div className="fixed inset-0 z-1">
         <svg className="w-full h-full" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice">
           <defs>
-            <linearGradient id="mountainGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="rgb(30, 41, 59)" stopOpacity="0.8" />
-              <stop offset="20%" stopColor="rgb(139, 92, 246)" stopOpacity="0.6" />
-              <stop offset="40%" stopColor="rgb(59, 130, 246)" stopOpacity="0.7" />
-              <stop offset="60%" stopColor="rgb(34, 197, 94)" stopOpacity="0.8" />
-              <stop offset="80%" stopColor="rgb(251, 191, 36)" stopOpacity="0.7" />
-              <stop offset="100%" stopColor="rgb(16, 185, 129)" stopOpacity="0.9" />
+            <linearGradient id="mountainGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="rgb(15, 23, 42)" stopOpacity="0.9" />
+              <stop offset="50%" stopColor="rgb(30, 41, 59)" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="rgb(51, 65, 85)" stopOpacity="0.7" />
             </linearGradient>
+            
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
           </defs>
           
-          {/* Mountain range path that represents life's journey */}
+          {/* Smooth mountain path */}
           <path
-            d={`M0,500 
-                Q143,${500 - journeySteps[0].elevation * 4} 143,${500 - journeySteps[0].elevation * 4}
-                T286,${500 - journeySteps[1].elevation * 4}
-                Q429,${500 - journeySteps[2].elevation * 4} 429,${500 - journeySteps[2].elevation * 4}
-                T571,${500 - journeySteps[3].elevation * 4}
-                Q714,${500 - journeySteps[4].elevation * 4} 714,${500 - journeySteps[4].elevation * 4}
-                T857,${500 - journeySteps[5].elevation * 4}
-                Q1000,${500 - journeySteps[6].elevation * 4} 1000,${500 - journeySteps[6].elevation * 4}
+            d={`M0,520 
+                C50,${520 - journeySteps[0].elevation * 3} 120,${520 - journeySteps[0].elevation * 3} 143,${520 - journeySteps[0].elevation * 3}
+                C170,${520 - journeySteps[1].elevation * 3} 260,${520 - journeySteps[1].elevation * 3} 286,${520 - journeySteps[1].elevation * 3}
+                C320,${520 - journeySteps[2].elevation * 3} 400,${520 - journeySteps[2].elevation * 3} 429,${520 - journeySteps[2].elevation * 3}
+                C460,${520 - journeySteps[3].elevation * 3} 540,${520 - journeySteps[3].elevation * 3} 571,${520 - journeySteps[3].elevation * 3}
+                C600,${520 - journeySteps[4].elevation * 3} 680,${520 - journeySteps[4].elevation * 3} 714,${520 - journeySteps[4].elevation * 3}
+                C750,${520 - journeySteps[5].elevation * 3} 820,${520 - journeySteps[5].elevation * 3} 857,${520 - journeySteps[5].elevation * 3}
+                C890,${520 - journeySteps[6].elevation * 3} 970,${520 - journeySteps[6].elevation * 3} 1000,${520 - journeySteps[6].elevation * 3}
                 L1000,600 L0,600 Z`}
             fill="url(#mountainGradient)"
             className="transition-all duration-1000"
           />
           
-          {/* Progress line showing journey completion */}
+          {/* Glowing progress line */}
           <path
-            d={`M0,500 
-                Q143,${500 - journeySteps[0].elevation * 4} 143,${500 - journeySteps[0].elevation * 4}
-                T286,${500 - journeySteps[1].elevation * 4}
-                Q429,${500 - journeySteps[2].elevation * 4} 429,${500 - journeySteps[2].elevation * 4}
-                T571,${500 - journeySteps[3].elevation * 4}
-                Q714,${500 - journeySteps[4].elevation * 4} 714,${500 - journeySteps[4].elevation * 4}
-                T857,${500 - journeySteps[5].elevation * 4}
-                Q1000,${500 - journeySteps[6].elevation * 4} 1000,${500 - journeySteps[6].elevation * 4}`}
+            d={`M0,520 
+                C50,${520 - journeySteps[0].elevation * 3} 120,${520 - journeySteps[0].elevation * 3} 143,${520 - journeySteps[0].elevation * 3}
+                C170,${520 - journeySteps[1].elevation * 3} 260,${520 - journeySteps[1].elevation * 3} 286,${520 - journeySteps[1].elevation * 3}
+                C320,${520 - journeySteps[2].elevation * 3} 400,${520 - journeySteps[2].elevation * 3} 429,${520 - journeySteps[2].elevation * 3}
+                C460,${520 - journeySteps[3].elevation * 3} 540,${520 - journeySteps[3].elevation * 3} 571,${520 - journeySteps[3].elevation * 3}
+                C600,${520 - journeySteps[4].elevation * 3} 680,${520 - journeySteps[4].elevation * 3} 714,${520 - journeySteps[4].elevation * 3}
+                C750,${520 - journeySteps[5].elevation * 3} 820,${520 - journeySteps[5].elevation * 3} 857,${520 - journeySteps[5].elevation * 3}
+                C890,${520 - journeySteps[6].elevation * 3} 970,${520 - journeySteps[6].elevation * 3} 1000,${520 - journeySteps[6].elevation * 3}`}
             fill="none"
             stroke="rgba(255, 255, 255, 0.8)"
-            strokeWidth="3"
-            strokeDasharray={`${scrollProgress * 2000} 2000`}
-            className="transition-all duration-300"
+            strokeWidth="2"
+            strokeDasharray={`${scrollProgress * 2500} 2500`}
+            filter="url(#glow)"
+            className="transition-all duration-500 ease-out"
           />
 
-          {/* Journey points on the mountain */}
-          {journeySteps.map((step, index) => (
-            <g key={step.id}>
-              <circle
-                cx={143 + (index * 143)}
-                cy={500 - step.elevation * 4}
-                r={index === currentStep ? "12" : "8"}
-                className={`fill-white transition-all duration-500 ${
-                  index <= currentStep ? 'opacity-100' : 'opacity-40'
-                } ${index === currentStep ? getMoodAnimation(step.mood) : ''}`}
-                stroke="rgba(100, 100, 100, 0.5)"
-                strokeWidth="2"
-              />
-              {index === currentStep && (
+          {/* Journey points */}
+          {journeySteps.map((step, index) => {
+            const isActive = index === currentStep;
+            const isPassed = index < currentStep;
+            
+            return (
+              <g key={step.id}>
                 <circle
                   cx={143 + (index * 143)}
-                  cy={500 - step.elevation * 4}
-                  r="20"
-                  fill="none"
-                  stroke="rgba(255, 255, 255, 0.6)"
-                  strokeWidth="1"
-                  className="animate-ping"
+                  cy={520 - step.elevation * 3}
+                  r={isActive ? "8" : "6"}
+                  fill={step.color}
+                  className={`transition-all duration-500 ${
+                    isPassed || isActive ? 'opacity-100' : 'opacity-30'
+                  }`}
+                  filter={isActive ? "url(#glow)" : "none"}
                 />
-              )}
-            </g>
-          ))}
+                
+                {/* Story tooltip above each point */}
+                {isActive && (
+                  <foreignObject
+                    x={143 + (index * 143) - 120}
+                    y={520 - step.elevation * 3 - 120}
+                    width="240"
+                    height="100"
+                    className="animate-fade-in"
+                  >
+                    <div className="bg-slate-800/90 backdrop-blur-sm rounded-lg p-3 border border-slate-600/50 text-white text-center shadow-xl">
+                      <div className="text-sm font-semibold mb-1" style={{ color: step.color }}>{step.title}</div>
+                      <div className="text-xs text-slate-300 mb-2">{step.period}</div>
+                      <div className="text-xs text-slate-200 leading-relaxed">{step.description}</div>
+                    </div>
+                  </foreignObject>
+                )}
+              </g>
+            );
+          })}
         </svg>
       </div>
 
-      {/* Sticky story card */}
-      <div className="sticky top-1/2 transform -translate-y-1/2 z-10 px-8">
-        <Card className="max-w-2xl mx-auto border-purple-700/50 bg-night-800/95 backdrop-blur-md shadow-2xl">
-          <CardContent className="p-8">
-            <div className="text-center">
-              <div className={`w-16 h-16 bg-gradient-to-r ${journeySteps[currentStep]?.color} rounded-full mx-auto mb-4 flex items-center justify-center ${getMoodAnimation(journeySteps[currentStep]?.mood)}`}>
-                <div className="w-8 h-8 bg-white rounded-full" />
-              </div>
-              <h2 className="text-2xl font-bold text-white mb-2 font-display">
-                {journeySteps[currentStep]?.title}
-              </h2>
-              <p className="text-purple-300 mb-4 font-medium">
-                {journeySteps[currentStep]?.period}
-              </p>
-              <p className="text-gray-300 leading-relaxed text-lg">
-                {journeySteps[currentStep]?.description}
-              </p>
-              
-              {/* Progress indicator */}
-              <div className="mt-6 flex justify-center space-x-2">
-                {journeySteps.map((_, index) => (
-                  <div
-                    key={index}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index <= currentStep 
-                        ? 'bg-gradient-to-r from-purple-400 to-blue-400' 
-                        : 'bg-gray-600'
-                    }`}
-                  />
-                ))}
-              </div>
-
-              {/* Scroll indicator */}
-              <div className="mt-6 text-purple-400 text-sm opacity-60">
-                {currentStep < journeySteps.length - 1 ? '↓ Continue scrolling to journey forward' : '✨ Journey complete'}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Bottom quote */}
-      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-20 max-w-3xl px-6">
-        <Card className="border-purple-600/50 bg-gradient-to-r from-night-800/90 to-purple-900/90 backdrop-blur-md shadow-xl">
-          <CardContent className="p-4 text-center">
+      {/* Quote at the end */}
+      {currentStep === journeySteps.length - 1 && (
+        <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-20 max-w-2xl px-6 animate-fade-in">
+          <div className="bg-slate-800/80 backdrop-blur-md rounded-lg p-6 border border-slate-600/30 shadow-2xl text-center">
             <blockquote className="text-lg font-medium text-white leading-relaxed italic">
               "AI helped me bridge the gap between creativity and technology. 
               It showed me what a compelling experience <em className="text-purple-300">should</em> feel like — and how to build it."
             </blockquote>
-            <div className="w-16 h-0.5 bg-gradient-to-r from-purple-400 to-green-400 mx-auto mt-3"></div>
-          </CardContent>
-        </Card>
-      </div>
+            <div className="w-16 h-0.5 bg-gradient-to-r from-purple-400 to-green-400 mx-auto mt-4"></div>
+          </div>
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.2; }
+          50% { opacity: 1; }
+        }
+        
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+          animation: fade-in 0.5s ease-out;
+        }
+        
+        .shooting-star {
+          position: absolute;
+          width: 2px;
+          height: 2px;
+          background: white;
+          border-radius: 50%;
+          animation: shooting 8s linear infinite;
+          opacity: 0;
+        }
+        
+        @keyframes shooting {
+          0% {
+            opacity: 0;
+            transform: translate(100vw, 0) rotate(45deg);
+          }
+          10% {
+            opacity: 1;
+          }
+          90% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+            transform: translate(-100px, 100px) rotate(45deg);
+          }
+        }
+        
+        .shooting-star:before {
+          content: '';
+          position: absolute;
+          width: 50px;
+          height: 1px;
+          background: linear-gradient(to right, white, transparent);
+          transform: translateX(-50px) rotate(45deg);
+        }
+      `}</style>
     </div>
   );
 };
