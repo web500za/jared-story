@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 const JourneyViewNew = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout>();
 
@@ -91,25 +92,41 @@ const JourneyViewNew = () => {
       
       setIsScrolling(true);
       
-      if (e.deltaY > 0 && currentStep < journeySteps.length - 1) {
-        setCurrentStep(prev => prev + 1);
-      } else if (e.deltaY < 0 && currentStep > 0) {
-        setCurrentStep(prev => prev - 1);
+      if (e.deltaY > 0) {
+        if (showHeader) {
+          setShowHeader(false);
+        } else if (currentStep < journeySteps.length - 1) {
+          setCurrentStep(prev => prev + 1);
+        }
+      } else if (e.deltaY < 0) {
+        if (currentStep > 0) {
+          setCurrentStep(prev => prev - 1);
+        } else if (!showHeader) {
+          setShowHeader(true);
+        }
       }
       
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         setIsScrolling(false);
-      }, 800);
+      }, 1000);
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowDown' && currentStep < journeySteps.length - 1) {
+      if (e.key === 'ArrowDown') {
         e.preventDefault();
-        setCurrentStep(prev => prev + 1);
-      } else if (e.key === 'ArrowUp' && currentStep > 0) {
+        if (showHeader) {
+          setShowHeader(false);
+        } else if (currentStep < journeySteps.length - 1) {
+          setCurrentStep(prev => prev + 1);
+        }
+      } else if (e.key === 'ArrowUp') {
         e.preventDefault();
-        setCurrentStep(prev => prev - 1);
+        if (currentStep > 0) {
+          setCurrentStep(prev => prev - 1);
+        } else if (!showHeader) {
+          setShowHeader(true);
+        }
       }
     };
 
@@ -121,7 +138,7 @@ const JourneyViewNew = () => {
       document.removeEventListener('keydown', handleKeyDown);
       clearTimeout(scrollTimeout);
     };
-  }, [currentStep, isScrolling, journeySteps.length]);
+  }, [currentStep, isScrolling, showHeader, journeySteps.length]);
 
   // Fixed star field
   const stars = Array.from({ length: 100 }, (_, i) => ({
@@ -171,6 +188,25 @@ const JourneyViewNew = () => {
       className="fixed inset-0 overflow-hidden bg-black"
       style={{ height: '100vh' }}
     >
+      {/* Header Section */}
+      <div 
+        className={`absolute inset-0 z-30 flex items-center justify-center transition-all duration-1000 ease-out ${
+          showHeader ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
+        }`}
+      >
+        <div className="text-center text-white">
+          <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            My Journey
+          </h1>
+          <p className="text-xl text-gray-300 mb-8">
+            Navigate through the peaks and valleys of my life story
+          </p>
+          <div className="text-gray-400 text-sm">
+            Scroll down to begin the journey
+          </div>
+        </div>
+      </div>
+
       {/* Starfield Background */}
       <div className="absolute inset-0">
         {stars.map((star) => (
@@ -190,7 +226,9 @@ const JourneyViewNew = () => {
       </div>
 
       {/* Mountain Graph */}
-      <div className="absolute inset-0 z-10">
+      <div className={`absolute inset-0 z-10 transition-all duration-1000 ease-out ${
+        showHeader ? 'opacity-30 scale-95' : 'opacity-100 scale-100'
+      }`}>
         <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="none">
           <defs>
             <linearGradient id="mountainGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -225,14 +263,16 @@ const JourneyViewNew = () => {
           />
           
           {/* Animated progress line */}
-          <path
-            d={generateProgressPath()}
-            fill="none"
-            stroke="#00D2FF"
-            strokeWidth="0.5"
-            filter="url(#lineGlow)"
-            className="transition-all duration-1000 ease-out"
-          />
+          {!showHeader && (
+            <path
+              d={generateProgressPath()}
+              fill="none"
+              stroke="#00D2FF"
+              strokeWidth="0.5"
+              filter="url(#lineGlow)"
+              className="transition-all duration-1000 ease-out"
+            />
+          )}
 
           {/* Journey touchpoints */}
           {journeySteps.map((step, index) => (
@@ -240,13 +280,13 @@ const JourneyViewNew = () => {
               <circle
                 cx={step.x}
                 cy={step.y}
-                r={index === currentStep ? "2" : index <= currentStep ? "1.5" : "1"}
+                r={!showHeader && index === currentStep ? "2" : "1"}
                 fill={step.color}
-                opacity={index <= currentStep ? 1 : 0.4}
-                filter={index === currentStep ? "url(#neonGlow)" : "none"}
+                opacity={showHeader ? 0.6 : (index <= currentStep ? 1 : 0.4)}
+                filter={!showHeader && index === currentStep ? "url(#neonGlow)" : "none"}
                 className="transition-all duration-800 ease-out"
               />
-              {index === currentStep && (
+              {!showHeader && index === currentStep && (
                 <circle
                   cx={step.x}
                   cy={step.y}
@@ -263,68 +303,69 @@ const JourneyViewNew = () => {
         </svg>
       </div>
 
-      {/* Full-height story card */}
-      <div className="absolute inset-0 z-20 flex items-center justify-center p-8">
-        <div 
-          className="w-full max-w-4xl h-full flex flex-col justify-center transition-all duration-1000 ease-out"
-          key={currentStep}
-        >
-          <div className="bg-gray-900/80 backdrop-blur-lg rounded-3xl p-12 border border-gray-700/50 text-center transform transition-all duration-1000 ease-out">
-            <div 
-              className="w-4 h-4 rounded-full mx-auto mb-8 animate-pulse"
-              style={{ backgroundColor: journeySteps[currentStep]?.color }}
-            />
-            
-            <h1 
-              className="text-5xl font-bold mb-4 transition-colors duration-700"
-              style={{ color: journeySteps[currentStep]?.color }}
-            >
-              {journeySteps[currentStep]?.title}
-            </h1>
-            
-            <p className="text-2xl text-gray-300 mb-8 font-light">
-              {journeySteps[currentStep]?.period}
-            </p>
-            
-            <p className="text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto">
-              {journeySteps[currentStep]?.description}
-            </p>
-            
-            {/* Step indicator */}
-            <div className="flex justify-center mt-12 space-x-3">
-              {journeySteps.map((_, index) => (
-                <div
-                  key={index}
-                  className={`w-3 h-3 rounded-full transition-all duration-500 ${
-                    index === currentStep 
-                      ? 'scale-125 opacity-100' 
-                      : index < currentStep 
-                        ? 'opacity-70' 
-                        : 'opacity-30'
-                  }`}
-                  style={{ 
-                    backgroundColor: index <= currentStep ? journeySteps[index].color : '#4B5563'
-                  }}
-                />
-              ))}
-            </div>
+      {/* Story content positioned to the side */}
+      {!showHeader && (
+        <div className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20 w-96">
+          <div 
+            className="transition-all duration-1000 ease-out transform"
+            key={currentStep}
+            style={{
+              animation: 'slideInRight 1s ease-out'
+            }}
+          >
+            <div className="bg-gray-900/90 backdrop-blur-lg rounded-2xl p-8 border border-gray-700/50 text-left">
+              <div 
+                className="w-3 h-3 rounded-full mb-6"
+                style={{ backgroundColor: journeySteps[currentStep]?.color }}
+              />
+              
+              <h2 
+                className="text-3xl font-bold mb-3 transition-colors duration-700"
+                style={{ color: journeySteps[currentStep]?.color }}
+              >
+                {journeySteps[currentStep]?.title}
+              </h2>
+              
+              <p className="text-lg text-gray-300 mb-4 font-medium">
+                {journeySteps[currentStep]?.period}
+              </p>
+              
+              <p className="text-gray-400 leading-relaxed mb-6">
+                {journeySteps[currentStep]?.description}
+              </p>
+              
+              {/* Step indicator */}
+              <div className="flex space-x-2 mb-4">
+                {journeySteps.map((_, index) => (
+                  <div
+                    key={index}
+                    className={`w-2 h-2 rounded-full transition-all duration-500 ${
+                      index === currentStep 
+                        ? 'scale-125 opacity-100' 
+                        : index < currentStep 
+                          ? 'opacity-70' 
+                          : 'opacity-30'
+                    }`}
+                    style={{ 
+                      backgroundColor: index <= currentStep ? journeySteps[index].color : '#4B5563'
+                    }}
+                  />
+                ))}
+              </div>
 
-            {/* Navigation hint */}
-            <div className="mt-8 text-gray-500 text-sm">
-              {currentStep < journeySteps.length - 1 ? (
-                <>Scroll down or use ↓ to continue</>
-              ) : (
-                <>Journey complete</>
-              )}
+              {/* Navigation hint */}
+              <div className="text-gray-500 text-xs">
+                {currentStep < journeySteps.length - 1 ? 'Scroll to continue' : 'Journey complete'}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Final quote overlay */}
-      {currentStep === journeySteps.length - 1 && (
-        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-30 max-w-2xl px-6">
-          <div className="bg-gray-900/70 backdrop-blur-md rounded-2xl p-6 border border-green-500/30 text-center">
+      {!showHeader && currentStep === journeySteps.length - 1 && (
+        <div className="absolute bottom-8 left-8 z-30 max-w-lg">
+          <div className="bg-gray-900/80 backdrop-blur-md rounded-xl p-6 border border-green-500/30">
             <blockquote className="text-lg font-medium text-white italic">
               "AI helped me bridge the gap between creativity and technology."
             </blockquote>
@@ -337,6 +378,11 @@ const JourneyViewNew = () => {
           0%, 92% { opacity: 0.2; }
           96% { opacity: 1; transform: scale(1.5); }
           100% { opacity: 0.2; transform: scale(1); }
+        }
+        
+        @keyframes slideInRight {
+          from { opacity: 0; transform: translateX(50px); }
+          to { opacity: 1; transform: translateX(0); }
         }
         
         body {
