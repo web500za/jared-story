@@ -8,56 +8,64 @@ const JourneyViewNew = () => {
       title: "Tech Early Roots",
       period: "Early Years",
       description: "PS1, PS2, World of Warcraft adventures. Jailbreaking iPhones, rooting Androids. Hardware, software, internet cafés. Curiosity over conversation.",
-      x: 10,
-      y: 70,
+      x: 8,
+      y: 75,
       color: "#6366F1"
     },
     {
-      title: "Almost Solo Music Video",
+      title: "Start Platinum Posse",
       period: "2012",
+      description: "Beginning my music journey as Platinum Posse. Building creative foundations and learning the craft of music production.",
+      x: 18,
+      y: 65,
+      color: "#8B5CF6"
+    },
+    {
+      title: "Almost Music Video",
+      period: "2016",
       description: "Solo music video propels me into a cult following. Building an audience through raw creativity and authentic connection.",
-      x: 20,
-      y: 60,
+      x: 30,
+      y: 50,
       color: "#EC4899"
     },
     {
       title: "Creative Peak",
-      period: "2012–2017",
-      description: "Music career as 'Platinum Posse.' Built audience, earned respect through creativity on Facebook, SoundCloud, and YouTube.",
-      x: 35,
-      y: 30,
+      period: "2017",
+      description: "Music career reaching its highest point. Earned respect through creativity on Facebook, SoundCloud, and YouTube.",
+      x: 42,
+      y: 25,
       color: "#A855F7"
     },
     {
       title: "Pivot from Music",
       period: "2018",
       description: "Realized music wouldn't sustain me in South Africa. Shifted focus from expression to structure — chasing stability while keeping creativity alive.",
-      x: 50,
-      y: 65,
+      x: 54,
+      y: 60,
       color: "#F97316"
     },
     {
       title: "Mastery Building",
       period: "2020–2024",
       description: "5CA years. SaaS expertise, mentoring, problem-solving at scale. First wave of tech support that laid the foundation for the team structure that followed.",
-      x: 65,
-      y: 45,
+      x: 66,
+      y: 40,
       color: "#3B82F6"
     },
     {
       title: "The Breakthrough",
       period: "2024",
       description: "Started troubleshooting my brain. ADHD medication changed my life and unlocked the gift of focus. AI + no-code fusion. Building what I imagine.",
-      x: 80,
-      y: 25,
+      x: 78,
+      y: 20,
       color: "#EAB308"
     },
     {
       title: "Future Forward",
       period: "Now",
       description: "Technology, creativity and customer-facing work combine in this breakthrough era of no-code + solution engineering. Creating human-centered AI tools.",
-      x: 90,
-      y: 15,
+      x: 92,
+      y: 10,
       color: "#22C55E"
     }
   ];
@@ -123,18 +131,18 @@ const JourneyViewNew = () => {
           
           {/* Mountain shape */}
           <path
-            d="M0,80 Q10,70 20,60 Q35,30 50,65 Q65,45 80,25 Q90,15 100,15 L100,100 L0,100 Z"
+            d="M0,85 Q8,75 18,65 Q30,50 42,25 Q54,60 66,40 Q78,20 92,10 L100,10 L100,100 L0,100 Z"
             fill="url(#mountainGrad)"
           />
           
           {/* Progress line */}
           <path
-            d="M0,80 Q10,70 20,60 Q35,30 50,65 Q65,45 80,25 Q90,15 100,15"
+            d="M0,85 Q8,75 18,65 Q30,50 42,25 Q54,60 66,40 Q78,20 92,10"
             fill="none"
-            stroke="rgba(255,255,255,0.6)"
-            strokeWidth="0.3"
-            strokeDasharray={`${(currentStep / (journeySteps.length - 1)) * 200} 200`}
-            className="transition-all duration-1000 ease-out"
+            stroke="rgba(255,255,255,0.8)"
+            strokeWidth="0.4"
+            strokeDasharray={`${(currentStep / (journeySteps.length - 1)) * 250} 250`}
+            className="transition-all duration-700 ease-out"
           />
 
           {/* Journey dots */}
