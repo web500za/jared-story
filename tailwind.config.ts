@@ -63,30 +63,45 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Warm color palette for the personal site
-				warm: {
-					50: '#fefdf9',
-					100: '#fdf8f0',
-					200: '#f9ede1',
-					300: '#f4ddc7',
-					400: '#ecc8a4',
-					500: '#e1b077',
-					600: '#d49c54',
-					700: '#c18943',
-					800: '#a06d39',
-					900: '#825a32',
+				// Dark blueish-purple theme inspired by Luno
+				night: {
+					50: '#f8fafc',
+					100: '#f1f5f9',
+					200: '#e2e8f0',
+					300: '#cbd5e1',
+					400: '#94a3b8',
+					500: '#64748b',
+					600: '#475569',
+					700: '#334155',
+					800: '#1e293b',
+					900: '#0f172a',
+					950: '#020617',
 				},
-				earth: {
-					50: '#f8f7f4',
-					100: '#efede6',
-					200: '#ddd9cc',
-					300: '#c7c0ad',
-					400: '#afa58c',
-					500: '#9c8f72',
-					600: '#8a7d63',
-					700: '#726654',
-					800: '#5e5447',
-					900: '#4d453a',
+				purple: {
+					50: '#faf5ff',
+					100: '#f3e8ff',
+					200: '#e9d5ff',
+					300: '#d8b4fe',
+					400: '#c084fc',
+					500: '#a855f7',
+					600: '#9333ea',
+					700: '#7c3aed',
+					800: '#6b21a8',
+					900: '#581c87',
+					950: '#3b0764',
+				},
+				blue: {
+					50: '#eff6ff',
+					100: '#dbeafe',
+					200: '#bfdbfe',
+					300: '#93c5fd',
+					400: '#60a5fa',
+					500: '#3b82f6',
+					600: '#2563eb',
+					700: '#1d4ed8',
+					800: '#1e40af',
+					900: '#1e3a8a',
+					950: '#172554',
 				}
 			},
 			fontFamily: {
@@ -134,13 +149,31 @@ export default {
 						opacity: '1',
 						transform: 'translateX(0)'
 					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0px)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
+				},
+				'pulse-slow': {
+					'0%, 100%': {
+						opacity: '1'
+					},
+					'50%': {
+						opacity: '0.8'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.6s ease-out',
-				'slide-in': 'slide-in 0.5s ease-out'
+				'slide-in': 'slide-in 0.5s ease-out',
+				'float': 'float 3s ease-in-out infinite',
+				'pulse-slow': 'pulse-slow 2s ease-in-out infinite'
 			}
 		}
 	},
