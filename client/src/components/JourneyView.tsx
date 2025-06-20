@@ -127,23 +127,52 @@ const JourneyView = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Minimalist Draggable Control */}
-      <div className="sticky top-4 z-50 flex justify-center px-6">
-        <div className="bg-night-800/80 backdrop-blur-sm rounded-full px-4 py-2 border border-purple-700/30">
-          <div 
-            ref={sliderRef}
-            className="relative w-64 h-2 bg-night-600 rounded-full cursor-pointer"
-            onMouseDown={handleMouseDown}
-            onTouchStart={handleTouchStart}
-          >
+      {/* Studio Mixer Style Control */}
+      <div className="sticky top-6 z-50 flex justify-center px-6">
+        <div className="bg-night-900/90 backdrop-blur-sm rounded-lg px-6 py-4 border border-purple-700/30 shadow-xl">
+          <div className="flex items-center space-x-4">
+            {/* Channel strips for each journey point */}
+            {journeyPoints.map((point, index) => (
+              <div key={point.id} className="flex flex-col items-center">
+                <div 
+                  className={`w-3 h-16 bg-gradient-to-t ${point.color} rounded-full relative cursor-pointer transition-all duration-300 hover:scale-105`}
+                  onClick={() => {
+                    const newPosition = (index / (journeyPoints.length - 1)) * 100;
+                    setSliderPosition(newPosition);
+                    setCurrentPoint(index);
+                  }}
+                >
+                  <div className={`absolute w-4 h-2 bg-night-200 rounded-sm shadow-lg transition-all duration-300 ${
+                    index === currentPoint ? 'bg-white' : 'bg-night-400'
+                  }`} style={{ 
+                    top: `${100 - ((index / (journeyPoints.length - 1)) * 80 + 10)}%`,
+                    left: '-2px'
+                  }} />
+                </div>
+                <div className="text-xs text-gray-400 mt-2 text-center w-12 truncate">{point.period}</div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Main fader */}
+          <div className="mt-4 flex justify-center">
             <div 
-              className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full transition-all duration-200"
-              style={{ width: `${sliderPosition}%` }}
-            />
-            <div 
-              className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-white rounded-full shadow-lg cursor-grab active:cursor-grabbing transition-all duration-200 hover:scale-110"
-              style={{ left: `${sliderPosition}%` }}
-            />
+              ref={sliderRef}
+              className="relative w-48 h-3 bg-night-700 rounded-full cursor-pointer"
+              onMouseDown={handleMouseDown}
+              onTouchStart={handleTouchStart}
+            >
+              <div 
+                className="absolute top-0 left-0 h-full bg-gradient-to-r from-gray-600 via-purple-600 via-blue-600 to-green-500 rounded-full transition-all duration-300"
+                style={{ width: `${sliderPosition}%` }}
+              />
+              <div 
+                className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 w-6 h-6 bg-white rounded-sm shadow-lg cursor-grab active:cursor-grabbing transition-all duration-200 hover:scale-110 border-2 border-night-600"
+                style={{ left: `${sliderPosition}%` }}
+              >
+                <div className="w-full h-full bg-gradient-to-b from-gray-200 to-gray-400 rounded-sm"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -181,33 +210,35 @@ const JourneyView = () => {
       </div>
 
       {/* Journey points on the mountain */}
-      <div className="relative z-10 h-screen p-8">
+      <div className="relative z-10 h-screen p-8 pt-32">
         {journeyPoints.map((point, index) => (
           <div
             key={point.id}
-            className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ${
-              index === currentPoint ? 'scale-110 z-20' : index < currentPoint ? 'opacity-80' : 'opacity-40'
+            className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 cursor-pointer ${
+              index === currentPoint ? 'scale-110 z-20' : index < currentPoint ? 'opacity-70' : 'opacity-30'
             }`}
             style={{
               left: `${point.position.x}%`,
-              top: `${point.position.y}%`,
-              animationDelay: `${index * 0.1}s`
+              top: `${point.position.y}%`
+            }}
+            onClick={() => {
+              const newPosition = (index / (journeyPoints.length - 1)) * 100;
+              setSliderPosition(newPosition);
+              setCurrentPoint(index);
             }}
           >
             <div className="relative group">
-              <div className={`w-8 h-8 bg-gradient-to-r ${point.color} rounded-full shadow-xl flex items-center justify-center text-lg transition-all duration-500 ${
-                index === currentPoint ? 'animate-pulse ring-4 ring-white/30' : ''
-              }`}>
-                {point.icon}
-              </div>
+              <div className={`w-6 h-6 bg-gradient-to-r ${point.color} rounded-full shadow-lg transition-all duration-300 ${
+                index === currentPoint ? 'ring-2 ring-white/50' : ''
+              }`} />
               
               {/* Info card appears for current point */}
               {index === currentPoint && (
-                <Card className="absolute top-12 left-1/2 transform -translate-x-1/2 w-72 border-purple-700/50 bg-night-800/95 backdrop-blur-sm animate-fade-in">
-                  <CardContent className="p-4">
+                <Card className="absolute top-8 left-1/2 transform -translate-x-1/2 w-80 border-purple-700/50 bg-night-800/95 backdrop-blur-sm animate-fade-in">
+                  <CardContent className="p-5">
                     <div className="text-center">
-                      <h3 className="text-white font-semibold mb-1">{point.title}</h3>
-                      <p className="text-purple-300 text-xs mb-2">{point.period}</p>
+                      <h3 className="text-white font-semibold mb-2 text-lg">{point.title}</h3>
+                      <p className="text-purple-300 text-sm mb-3 font-medium">{point.period}</p>
                       <p className="text-gray-300 text-sm leading-relaxed">{point.description}</p>
                     </div>
                   </CardContent>
