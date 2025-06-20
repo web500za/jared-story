@@ -46,7 +46,8 @@ const CVView = () => {
                   </div>
                   <p className="text-gray-300 leading-relaxed mb-4">
                     Enterprise-level technical support for PKI certificate management on CertCentral SaaS platform. 
-                    Lead complex API integrations, ACME automation deployments, and enterprise onboarding during critical SaaS transitions.
+                    Lead complex API integrations, ACME automation deployments, CI/CD pipeline troubleshooting, and enterprise onboarding during critical SaaS transitions. 
+                    Customers frequently reach out to my manager expressing appreciation for personalized service and technical guidance.
                   </p>
                   <div className="grid md:grid-cols-2 gap-4 text-sm">
                     <div className="flex items-center gap-2">
@@ -55,11 +56,11 @@ const CVView = () => {
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                      <span className="text-gray-300">Cross-functional collaboration with Product & Sales</span>
+                      <span className="text-gray-300">Direct customer escalations praising service quality</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
-                      <span className="text-gray-300">API integration guidance & automation setup</span>
+                      <span className="text-gray-300">API integration, CI/CD setup & automation troubleshooting</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-pink-400 rounded-full"></span>
@@ -94,7 +95,7 @@ const CVView = () => {
 
           {/* Technical Skills & Projects */}
           <section>
-            <h2 className="text-2xl font-bold text-purple-300 mb-6 border-b-2 border-purple-600 pb-2">Technical Expertise & Innovation</h2>
+            <h2 className="text-2xl font-bold text-purple-300 mb-6 border-b-2 border-purple-600 pb-2">Technical Expertise & Customer Experience</h2>
             <div className="grid md:grid-cols-2 gap-6">
               <Card className="border-purple-700/50 bg-night-800/50">
                 <CardContent className="p-5">
@@ -144,39 +145,54 @@ const CVView = () => {
               <Card className="border-purple-700/50 bg-night-800/50">
                 <CardContent className="p-5">
                   <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
-                    <span className="text-lg">🌐</span>
-                    Interactive Deployments
+                    <span className="text-lg">🤝</span>
+                    Customer Experience Mastery
                   </h3>
-                  <p className="text-gray-300 text-sm mb-3">Built and deployed interactive testing environments for user workflow validation</p>
+                  <p className="text-gray-300 text-sm mb-3">Deep understanding of full customer journey through Salesforce CRM insights, retention patterns, and proactive experience optimization</p>
                   <div className="flex flex-wrap gap-2">
-                    <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs">Vercel Deploy</Badge>
-                    <Badge className="bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs">UX Testing</Badge>
-                    <Badge className="bg-gradient-to-r from-green-600 to-blue-600 text-white text-xs">User Workflows</Badge>
+                    <Badge className="bg-gradient-to-r from-blue-600 to-green-600 text-white text-xs">Salesforce CRM</Badge>
+                    <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs">Customer Retention</Badge>
+                    <Badge className="bg-gradient-to-r from-green-600 to-blue-600 text-white text-xs">Experience Design</Badge>
                   </div>
                 </CardContent>
               </Card>
             </div>
           </section>
 
-          {/* Strengths */}
+          {/* Core Value Proposition */}
           <section>
-            <h2 className="text-2xl font-bold text-purple-300 mb-6 border-b-2 border-purple-600 pb-2">Core Strengths & Value</h2>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="flex items-center gap-3 p-4 bg-night-800/30 rounded-lg border border-purple-700/30">
-                <span className="text-2xl">🗣️</span>
-                <span className="text-gray-300">Transform complex technical concepts into clear, actionable guidance</span>
-              </div>
-              <div className="flex items-center gap-3 p-4 bg-night-800/30 rounded-lg border border-purple-700/30">
-                <span className="text-2xl">🎨</span>
-                <span className="text-gray-300">Creative problem-solving with security-first and user-centric approach</span>
-              </div>
-              <div className="flex items-center gap-3 p-4 bg-night-800/30 rounded-lg border border-purple-700/30">
-                <span className="text-2xl">🤝</span>
-                <span className="text-gray-300">Bridge technical and business teams through empathetic communication</span>
-              </div>
-              <div className="flex items-center gap-3 p-4 bg-night-800/30 rounded-lg border border-purple-700/30">
-                <span className="text-2xl">⚙️</span>
-                <span className="text-gray-300">Systems architect mindset with passion for building empowering tools</span>
+            <h2 className="text-2xl font-bold text-purple-300 mb-6 border-b-2 border-purple-600 pb-2">Core Value & Impact</h2>
+            <div className="grid gap-6">
+              <Card className="border-purple-700/50 bg-gradient-to-r from-night-800/80 to-purple-900/40 p-6">
+                <div className="text-center">
+                  <div className="text-3xl mb-4">🎯</div>
+                  <h3 className="text-xl font-semibold text-white mb-3">From Support to Product Innovation</h3>
+                  <p className="text-gray-300 leading-relaxed max-w-4xl mx-auto">
+                    Four years in customer support taught me what exceptional experiences look like — and more importantly, 
+                    what below-par experiences feel like. This insight, combined with technical skills and creative problem-solving, 
+                    positions me uniquely to bridge customer needs with product development. I'm ready to transition from 
+                    supporting products to building them.
+                  </p>
+                </div>
+              </Card>
+              
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="flex items-center gap-3 p-4 bg-night-800/30 rounded-lg border border-purple-700/30">
+                  <span className="text-2xl">🗣️</span>
+                  <span className="text-gray-300">Transform complex technical concepts into clear, actionable guidance</span>
+                </div>
+                <div className="flex items-center gap-3 p-4 bg-night-800/30 rounded-lg border border-purple-700/30">
+                  <span className="text-2xl">🎨</span>
+                  <span className="text-gray-300">Creative problem-solving with security-first and user-centric approach</span>
+                </div>
+                <div className="flex items-center gap-3 p-4 bg-night-800/30 rounded-lg border border-purple-700/30">
+                  <span className="text-2xl">🔄</span>
+                  <span className="text-gray-300">Bridge technical and business teams through empathetic communication</span>
+                </div>
+                <div className="flex items-center gap-3 p-4 bg-night-800/30 rounded-lg border border-purple-700/30">
+                  <span className="text-2xl">⚙️</span>
+                  <span className="text-gray-300">Systems architect mindset with passion for building empowering tools</span>
+                </div>
               </div>
             </div>
           </section>
@@ -208,25 +224,80 @@ const CVView = () => {
             </div>
           </section>
 
-          {/* Growing Into */}
+          {/* Career Evolution */}
           <section>
-            <h2 className="text-2xl font-bold text-purple-300 mb-6 border-b-2 border-purple-600 pb-2">Career Trajectory</h2>
-            <div className="flex flex-wrap gap-3">
-              {[
-                "Technical Customer Success Manager", 
-                "Implementation Engineer", 
-                "DevOps Support Specialist", 
-                "No-Code Solutions Consultant"
-              ].map((role) => (
-                <Badge key={role} className="bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 px-4 py-2 text-sm">
-                  {role}
-                </Badge>
-              ))}
+            <h2 className="text-2xl font-bold text-purple-300 mb-6 border-b-2 border-purple-600 pb-2">Career Evolution Path</h2>
+            
+            {/* Visual journey flow */}
+            <div className="relative mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <div className="text-center flex-1">
+                  <div className="w-12 h-12 bg-gradient-to-r from-gray-600 to-blue-600 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-2">1</div>
+                  <div className="text-sm text-gray-300">Support Specialist</div>
+                  <div className="text-xs text-purple-400">Foundation Built</div>
+                </div>
+                
+                <div className="flex-1 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 mx-4"></div>
+                
+                <div className="text-center flex-1">
+                  <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-2">2</div>
+                  <div className="text-sm text-gray-300">Technical Success</div>
+                  <div className="text-xs text-purple-400">Current Growth</div>
+                </div>
+                
+                <div className="flex-1 h-0.5 bg-gradient-to-r from-purple-600 to-green-600 mx-4"></div>
+                
+                <div className="text-center flex-1">
+                  <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-2">3</div>
+                  <div className="text-sm text-gray-300">Product Innovation</div>
+                  <div className="text-xs text-green-400">Next Chapter</div>
+                </div>
+              </div>
             </div>
-            <div className="mt-6 p-6 bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-lg border border-purple-600/30">
-              <p className="text-lg text-purple-200 italic leading-relaxed">
-                "Currently seeking opportunities to merge technical expertise with creative problem-solving in customer-facing implementation and success roles. 
-                Ready to help teams bridge the gap between complex technology and human-centered experiences."
+            
+            <div className="grid md:grid-cols-2 gap-6 mb-6">
+              <Card className="border-purple-700/50 bg-night-800/50">
+                <CardContent className="p-5">
+                  <h3 className="font-semibold text-white mb-3">Immediate Opportunities</h3>
+                  <div className="space-y-2">
+                    {[
+                      "Technical Customer Success Manager", 
+                      "Implementation Engineer", 
+                      "DevOps Support Specialist"
+                    ].map((role) => (
+                      <div key={role} className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+                        <span className="text-gray-300 text-sm">{role}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-purple-700/50 bg-night-800/50">
+                <CardContent className="p-5">
+                  <h3 className="font-semibold text-white mb-3">Future Vision</h3>
+                  <div className="space-y-2">
+                    {[
+                      "No-Code Solutions Consultant",
+                      "Product Implementation Lead", 
+                      "Customer Experience Architect"
+                    ].map((role) => (
+                      <div key={role} className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
+                        <span className="text-gray-300 text-sm">{role}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <div className="p-6 bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-lg border border-purple-600/30">
+              <p className="text-lg text-purple-200 italic leading-relaxed text-center">
+                "Ready to transition from supporting great products to building them. 
+                Four years of customer insights + technical skills + creative problem-solving = 
+                the perfect foundation for product-focused roles."
               </p>
             </div>
           </section>

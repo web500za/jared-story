@@ -1,160 +1,259 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const JourneyView = () => {
-  const [showQuote, setShowQuote] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setShowQuote(true), 2000);
-    return () => clearTimeout(timer);
-  }, []);
+  const [currentPoint, setCurrentPoint] = useState(0);
+  const [sliderPosition, setSliderPosition] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   const journeyPoints = [
     {
       id: 1,
       icon: "📦",
-      title: "Tech Roots",
+      title: "Tech Early Roots",
       period: "Early Years",
-      description: "Hardware, software, internet cafés. Curiosity over conversation.",
-      position: { x: 15, y: 85 },
+      description: "PS1, PS2, World of Warcraft adventures. Jailbreaking iPhones, rooting Androids. Hardware, software, internet cafés. Curiosity over conversation.",
+      position: { x: 0, y: 85 },
       color: "from-gray-600 to-blue-600"
     },
     {
       id: 2,
-      icon: "🎤",
-      title: "Creative Peak",
-      period: "2012–2017",
-      description: "Music career as 'Platinum Posse.' Built audience, earned respect through creativity.",
-      position: { x: 30, y: 65 },
-      color: "from-purple-600 to-pink-600"
+      icon: "🎵",
+      title: "Almost Solo Music Video",
+      period: "2012",
+      description: "Solo music video propels me into a cult following. Building an audience through raw creativity and authentic connection.",
+      position: { x: 16.6, y: 70 },
+      color: "from-pink-600 to-purple-600"
     },
     {
       id: 3,
-      icon: "🔄",
-      title: "Reality Check",
-      period: "2018",
-      description: "Pivoted from music to sustainable tech career. Creativity + stability.",
-      position: { x: 45, y: 75 },
-      color: "from-orange-600 to-red-600"
+      icon: "🎤",
+      title: "Creative Peak",
+      period: "2012–2017",
+      description: "Music career as 'Platinum Posse.' Built audience, earned respect through creativity on Facebook, SoundCloud, and YouTube.",
+      position: { x: 33.2, y: 65 },
+      color: "from-purple-600 to-pink-600"
     },
     {
       id: 4,
-      icon: "🔧",
-      title: "Mastery Building",
-      period: "2020–2024",
-      description: "5CA years. SaaS expertise, mentoring, problem-solving at scale.",
-      position: { x: 60, y: 55 },
-      color: "from-blue-600 to-purple-600"
+      icon: "🔄",
+      title: "Pivot from Music",
+      period: "2018",
+      description: "Realized music wouldn't sustain me in South Africa. Shifted focus from expression to structure — chasing stability while keeping creativity alive.",
+      position: { x: 49.8, y: 75 },
+      color: "from-orange-600 to-red-600"
     },
     {
       id: 5,
-      icon: "⚡",
-      title: "The Breakthrough",
-      period: "2024",
-      description: "Focus unlocked. AI + no-code fusion. Building what I imagine.",
-      position: { x: 75, y: 35 },
-      color: "from-yellow-500 to-orange-500"
+      icon: "🔧",
+      title: "Mastery Building",
+      period: "2020–2024",
+      description: "5CA years. SaaS expertise, mentoring, problem-solving at scale. Learning to troubleshoot, explain, and resolve complex issues.",
+      position: { x: 66.4, y: 55 },
+      color: "from-blue-600 to-purple-600"
     },
     {
       id: 6,
+      icon: "⚡",
+      title: "The Breakthrough",
+      period: "2024",
+      description: "Started troubleshooting my brain. ADHD medication changed my life and unlocked the gift of focus. AI + no-code fusion. Building what I imagine.",
+      position: { x: 83, y: 35 },
+      color: "from-yellow-500 to-orange-500"
+    },
+    {
+      id: 7,
       icon: "🚀",
       title: "Future Forward",
       period: "Now",
-      description: "Creating human-centered AI tools. Technical + Creative + Empowering.",
-      position: { x: 90, y: 15 },
+      description: "Technology, creativity and customer-facing work combine in this breakthrough era of no-code + solution engineering. Creating human-centered AI tools.",
+      position: { x: 100, y: 15 },
       color: "from-green-500 to-blue-500"
     }
   ];
 
+  const handleSliderDrag = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!sliderRef.current || !isDragging) return;
+    
+    const rect = sliderRef.current.getBoundingClientRect();
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const newPosition = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+    
+    setSliderPosition(newPosition);
+    
+    // Update current point based on position
+    const pointIndex = Math.floor((newPosition / 100) * (journeyPoints.length - 1));
+    setCurrentPoint(Math.min(pointIndex, journeyPoints.length - 1));
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    handleSliderDrag(e);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDragging(true);
+    handleSliderDrag(e);
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isDragging) {
+        handleSliderDrag(e as any);
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (isDragging) {
+        e.preventDefault();
+        handleSliderDrag(e as any);
+      }
+    };
+
+    const handleMouseUp = () => setIsDragging(false);
+    const handleTouchEnd = () => setIsDragging(false);
+
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('touchmove', handleTouchMove, { passive: false });
+      document.addEventListener('touchend', handleTouchEnd);
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [isDragging]);
+
+  // Auto-advance timeline
+  useEffect(() => {
+    if (!isDragging) {
+      const timer = setInterval(() => {
+        setSliderPosition(prev => {
+          const newPos = (prev + 0.5) % 100;
+          const pointIndex = Math.floor((newPos / 100) * (journeyPoints.length - 1));
+          setCurrentPoint(Math.min(pointIndex, journeyPoints.length - 1));
+          return newPos;
+        });
+      }, 150);
+      return () => clearInterval(timer);
+    }
+  }, [isDragging, journeyPoints.length]);
+
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Simplified upward slope */}
-      <div className="absolute inset-0">
-        <svg 
-          className="w-full h-full" 
-          viewBox="0 0 100 100" 
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <linearGradient id="upwardSlope" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="rgb(75, 85, 99)" stopOpacity="0.4" />
-              <stop offset="25%" stopColor="rgb(139, 92, 246)" stopOpacity="0.5" />
-              <stop offset="50%" stopColor="rgb(59, 130, 246)" stopOpacity="0.6" />
-              <stop offset="75%" stopColor="rgb(34, 197, 94)" stopOpacity="0.7" />
-              <stop offset="100%" stopColor="rgb(16, 185, 129)" stopOpacity="0.8" />
-            </linearGradient>
-          </defs>
+      {/* Interactive Slider at Top */}
+      <div className="sticky top-0 z-50 bg-night-900/95 backdrop-blur-sm border-b border-purple-800/50 p-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-white mb-2">Interactive Journey Timeline</h2>
+            <p className="text-purple-300">Drag the button below to explore my path</p>
+          </div>
           
-          <path
-            d="M0,90 Q20,88 30,70 T45,80 Q55,80 60,60 T75,40 Q85,40 90,20 L100,15 L100,100 L0,100 Z"
-            fill="url(#upwardSlope)"
-            className="animate-pulse-slow"
-          />
-          
-          <path
-            d="M0,90 Q20,88 30,70 T45,80 Q55,80 60,60 T75,40 Q85,40 90,20 L100,15"
-            fill="none"
-            stroke="url(#upwardSlope)"
-            strokeWidth="0.3"
-            className="animate-float"
-          />
-        </svg>
-      </div>
-
-      {/* Journey points - simplified */}
-      <div className="relative z-10 h-screen p-8">
-        {journeyPoints.map((point, index) => (
-          <div
-            key={point.id}
-            className="absolute transform -translate-x-1/2 -translate-y-1/2 animate-fade-in"
-            style={{
-              left: `${point.position.x}%`,
-              top: `${point.position.y}%`,
-              animationDelay: `${index * 0.4}s`
-            }}
+          {/* Custom Slider */}
+          <div 
+            ref={sliderRef}
+            className="relative h-16 bg-gradient-to-r from-night-700 to-night-600 rounded-full border border-purple-700/50 cursor-pointer select-none"
+            onMouseDown={handleMouseDown}
+            onTouchStart={handleTouchStart}
           >
-            {/* Glowing point */}
-            <div className="relative group">
-              <div className={`w-6 h-6 bg-gradient-to-r ${point.color} rounded-full animate-float shadow-lg`}
-                   style={{ animationDelay: `${index * 0.5}s` }}>
+            {/* Progress Track */}
+            <div 
+              className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-600 via-blue-600 to-green-500 rounded-full transition-all duration-300 ease-out"
+              style={{ width: `${sliderPosition}%` }}
+            />
+            
+            {/* Journey Point Markers */}
+            {journeyPoints.map((point, index) => (
+              <div
+                key={point.id}
+                className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2"
+                style={{ left: `${(index / (journeyPoints.length - 1)) * 100}%` }}
+              >
+                <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${point.color} border-2 border-white shadow-lg transition-all duration-300 ${
+                  index <= currentPoint ? 'scale-110 opacity-100' : 'scale-75 opacity-50'
+                }`} />
               </div>
-              
-              {/* Hover card - cleaner */}
-              <Card className="absolute top-8 left-1/2 transform -translate-x-1/2 w-64 opacity-0 group-hover:opacity-100 transition-all duration-300 border-purple-700/50 bg-night-800/95 backdrop-blur-sm">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className={`w-10 h-10 bg-gradient-to-br ${point.color} rounded-full flex items-center justify-center text-lg`}>
-                      {point.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-white font-semibold">{point.title}</h3>
-                      <p className="text-purple-300 text-xs">{point.period}</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-300 text-sm">{point.description}</p>
-                </CardContent>
-              </Card>
+            ))}
+            
+            {/* Draggable Button */}
+            <div 
+              className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 transition-all duration-300 ease-out"
+              style={{ left: `${sliderPosition}%` }}
+            >
+              <div className={`w-12 h-12 bg-gradient-to-r from-white to-purple-100 rounded-full border-4 border-purple-400 shadow-xl cursor-grab active:cursor-grabbing flex items-center justify-center text-lg hover:scale-110 transition-transform duration-200 ${
+                isDragging ? 'scale-125 shadow-2xl' : ''
+              }`}>
+                {journeyPoints[currentPoint]?.icon}
+              </div>
             </div>
           </div>
-        ))}
+        </div>
       </div>
 
-      {/* Floating quote - positioned better */}
-      {showQuote && (
-        <div className="fixed bottom-12 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in max-w-3xl px-6">
-          <Card className="border-purple-600/50 bg-gradient-to-r from-night-800/98 to-purple-900/98 backdrop-blur-md shadow-2xl">
-            <CardContent className="p-6 text-center">
-              <div className="text-3xl mb-4 animate-float">✨</div>
-              <blockquote className="text-lg md:text-xl font-medium text-white leading-relaxed italic">
-                "AI helped me bridge the gap between creativity and technology. 
-                It showed me what a compelling experience <em className="text-purple-300">should</em> feel like — and how to build it."
-              </blockquote>
-              <div className="w-16 h-0.5 bg-gradient-to-r from-purple-400 to-green-400 mx-auto mt-4"></div>
+      {/* Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-night-950 via-purple-950 to-blue-950" />
+
+      {/* Current Journey Point Display */}
+      <div className="relative z-10 min-h-screen flex items-center justify-center p-8">
+        <div className="max-w-4xl mx-auto">
+          <Card className="border-purple-700/50 bg-night-800/90 backdrop-blur-md shadow-2xl">
+            <CardContent className="p-8">
+              <div className="text-center mb-8">
+                <div className={`w-20 h-20 bg-gradient-to-r ${journeyPoints[currentPoint]?.color} rounded-full flex items-center justify-center text-4xl mx-auto mb-4 animate-float`}>
+                  {journeyPoints[currentPoint]?.icon}
+                </div>
+                <h3 className="text-3xl font-bold text-white mb-2 font-display">
+                  {journeyPoints[currentPoint]?.title}
+                </h3>
+                <p className="text-purple-300 text-lg font-medium">
+                  {journeyPoints[currentPoint]?.period}
+                </p>
+              </div>
+              
+              <div className="text-center">
+                <p className="text-gray-300 text-lg leading-relaxed max-w-3xl mx-auto">
+                  {journeyPoints[currentPoint]?.description}
+                </p>
+              </div>
+
+              {/* Progress Indicator */}
+              <div className="mt-8 flex justify-center">
+                <div className="flex space-x-2">
+                  {journeyPoints.map((_, index) => (
+                    <div
+                      key={index}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        index <= currentPoint 
+                          ? 'bg-gradient-to-r from-purple-400 to-blue-400' 
+                          : 'bg-gray-600'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>
-      )}
+      </div>
+
+      {/* Inspirational Quote */}
+      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-20 max-w-3xl px-6">
+        <Card className="border-purple-600/50 bg-gradient-to-r from-night-800/95 to-purple-900/95 backdrop-blur-md shadow-xl">
+          <CardContent className="p-4 text-center">
+            <blockquote className="text-lg font-medium text-white leading-relaxed italic">
+              "AI helped me bridge the gap between creativity and technology. 
+              It showed me what a compelling experience <em className="text-purple-300">should</em> feel like — and how to build it."
+            </blockquote>
+            <div className="w-16 h-0.5 bg-gradient-to-r from-purple-400 to-green-400 mx-auto mt-3"></div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };
