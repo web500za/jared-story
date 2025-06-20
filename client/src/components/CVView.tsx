@@ -81,7 +81,7 @@ const CVView = () => {
                   </div>
                   <p className="text-gray-300 leading-relaxed">
                     Tier 2 technical support for mobile gaming SaaS platform serving millions of users. 
-                    Specialized in performance optimization, data synchronization, and account management. Mentored junior team members and contributed to internal tooling improvements.
+                    Specialized in performance optimization, data synchronization, and account management. First wave of tech support that laid the foundation for the team structure that followed.
                   </p>
                   <div className="flex flex-wrap gap-3 mt-4">
                     <span className="text-xs bg-night-700 text-purple-300 px-2 py-1 rounded">45 tickets/day average</span>
@@ -163,15 +163,15 @@ const CVView = () => {
           <section>
             <h2 className="text-2xl font-bold text-purple-300 mb-6 border-b-2 border-purple-600 pb-2">Core Value & Impact</h2>
             <div className="grid gap-6">
-              <Card className="border-purple-700/50 bg-gradient-to-r from-night-800/80 to-purple-900/40 p-6">
+              <Card className="border-purple-700/50 bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-6">
                 <div className="text-center">
                   <div className="text-3xl mb-4">🎯</div>
-                  <h3 className="text-xl font-semibold text-white mb-3">From Support to Product Innovation</h3>
+                  <h3 className="text-xl font-semibold text-white mb-3">Business Operations Architect</h3>
                   <p className="text-gray-300 leading-relaxed max-w-4xl mx-auto">
-                    Four years in customer support taught me what exceptional experiences look like — and more importantly, 
-                    what below-par experiences feel like. This insight, combined with technical skills and creative problem-solving, 
-                    positions me uniquely to bridge customer needs with product development. I'm ready to transition from 
-                    supporting products to building them.
+                    Four years in customer support taught me what exceptional experiences look like — and critically, 
+                    what below-par experiences feel like. I want to build proprietary solutions that improve products for both 
+                    front-end and back-end operations. My approach: map entire business operations like SimCity, 
+                    identify optimization points, then create creative solutions that enhance the customer experience at every touchpoint.
                   </p>
                 </div>
               </Card>
@@ -261,9 +261,9 @@ const CVView = () => {
                   <h3 className="font-semibold text-white mb-3">Immediate Opportunities</h3>
                   <div className="space-y-2">
                     {[
-                      "Technical Customer Success Manager", 
+                      "Customer Experience Engineer", 
                       "Implementation Engineer", 
-                      "DevOps Support Specialist"
+                      "SaaS Creator"
                     ].map((role) => (
                       <div key={role} className="flex items-center gap-2">
                         <span className="w-2 h-2 bg-green-400 rounded-full"></span>

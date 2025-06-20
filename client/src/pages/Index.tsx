@@ -19,28 +19,35 @@ const Index = () => {
               <p className="text-blue-300">Cape Town, South Africa</p>
             </div>
             
-            <div className="flex items-center space-x-2 bg-night-800/50 rounded-lg p-1 border border-purple-700/50">
+            <div className="flex items-center space-x-2 bg-night-800/50 rounded-lg p-1 border border-purple-700/50 relative">
+              <div 
+                className="absolute inset-y-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-md transition-all duration-300 ease-out"
+                style={{
+                  left: activeView === "cv" ? "4px" : "50%",
+                  width: "calc(50% - 8px)"
+                }}
+              />
               <Button
-                variant={activeView === "cv" ? "default" : "ghost"}
+                variant="ghost"
                 size="lg"
                 onClick={() => setActiveView("cv")}
                 className={`${
                   activeView === "cv" 
-                    ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700" 
-                    : "text-purple-300 hover:bg-purple-800/50 hover:text-white"
-                } transition-all duration-200 px-8 py-3`}
+                    ? "text-white relative z-10" 
+                    : "text-purple-300 hover:text-white relative z-10"
+                } transition-all duration-200 px-8 py-3 hover:bg-transparent`}
               >
                 📄 My CV
               </Button>
               <Button
-                variant={activeView === "journey" ? "default" : "ghost"}
+                variant="ghost"
                 size="lg"
                 onClick={() => setActiveView("journey")}
                 className={`${
                   activeView === "journey" 
-                    ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700" 
-                    : "text-purple-300 hover:bg-purple-800/50 hover:text-white"
-                } transition-all duration-200 px-8 py-3`}
+                    ? "text-white relative z-10" 
+                    : "text-purple-300 hover:text-white relative z-10"
+                } transition-all duration-200 px-8 py-3 hover:bg-transparent`}
               >
                 🌀 My Journey
               </Button>
