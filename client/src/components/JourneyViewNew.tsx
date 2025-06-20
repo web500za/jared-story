@@ -11,7 +11,7 @@ const JourneyViewNew = () => {
       period: "Early Years",
       description: "PS1, PS2, World of Warcraft adventures. Jailbreaking iPhones, rooting Androids. Hardware, software, internet cafés. Curiosity over conversation.",
       elevation: 25,
-      color: "#4F46E5", // Indigo
+      color: "#6366F1", // Indigo-500
       mood: "discovery"
     },
     {
@@ -20,7 +20,7 @@ const JourneyViewNew = () => {
       period: "2012",
       description: "Solo music video propels me into a cult following. Building an audience through raw creativity and authentic connection.",
       elevation: 45,
-      color: "#EC4899", // Pink
+      color: "#EC4899", // Pink-500
       mood: "breakthrough"
     },
     {
@@ -29,7 +29,7 @@ const JourneyViewNew = () => {
       period: "2012–2017",
       description: "Music career as 'Platinum Posse.' Built audience, earned respect through creativity on Facebook, SoundCloud, and YouTube.",
       elevation: 75,
-      color: "#8B5CF6", // Purple
+      color: "#A855F7", // Purple-500
       mood: "triumph"
     },
     {
@@ -38,7 +38,7 @@ const JourneyViewNew = () => {
       period: "2018",
       description: "Realized music wouldn't sustain me in South Africa. Shifted focus from expression to structure — chasing stability while keeping creativity alive.",
       elevation: 35,
-      color: "#F97316", // Orange
+      color: "#F97316", // Orange-500
       mood: "transition"
     },
     {
@@ -47,7 +47,7 @@ const JourneyViewNew = () => {
       period: "2020–2024",
       description: "5CA years. SaaS expertise, mentoring, problem-solving at scale. First wave of tech support that laid the foundation for the team structure that followed.",
       elevation: 55,
-      color: "#3B82F6", // Blue
+      color: "#3B82F6", // Blue-500
       mood: "growth"
     },
     {
@@ -56,7 +56,7 @@ const JourneyViewNew = () => {
       period: "2024",
       description: "Started troubleshooting my brain. ADHD medication changed my life and unlocked the gift of focus. AI + no-code fusion. Building what I imagine.",
       elevation: 85,
-      color: "#F59E0B", // Amber
+      color: "#EAB308", // Yellow-500
       mood: "transformation"
     },
     {
@@ -65,7 +65,7 @@ const JourneyViewNew = () => {
       period: "Now",
       description: "Technology, creativity and customer-facing work combine in this breakthrough era of no-code + solution engineering. Creating human-centered AI tools.",
       elevation: 95,
-      color: "#10B981", // Emerald
+      color: "#22C55E", // Green-500
       mood: "aspiration"
     }
   ];
@@ -77,7 +77,8 @@ const JourneyViewNew = () => {
       const progress = Math.min(scrollTop / docHeight, 1);
       setScrollProgress(progress);
       
-      const stepIndex = Math.floor(progress * journeySteps.length);
+      // More accurate step calculation
+      const stepIndex = Math.round(progress * (journeySteps.length - 1));
       setCurrentStep(Math.min(stepIndex, journeySteps.length - 1));
     };
 
@@ -85,58 +86,58 @@ const JourneyViewNew = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [journeySteps.length]);
 
-  // Generate random stars
+  // Generate fixed stars with dramatic twinkling
   const generateStars = (count: number) => {
     return Array.from({ length: count }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
-      y: Math.random() * 60,
-      size: Math.random() * 2 + 1,
-      opacity: Math.random() * 0.8 + 0.2,
-      twinkleDelay: Math.random() * 3
+      y: Math.random() * 70,
+      size: Math.random() * 3 + 1,
+      brightness: Math.random() > 0.7 ? 'bright' : 'dim',
+      twinkleDelay: Math.random() * 8 + 2 // 2-10 second delays for more dramatic effect
     }));
   };
 
-  const stars = generateStars(100);
+  const stars = generateStars(80);
 
   return (
-    <div className="min-h-[500vh] relative overflow-hidden">
-      {/* Night Sky Background */}
-      <div className="fixed inset-0 z-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-[500vh] relative overflow-hidden bg-gradient-to-br from-slate-950 via-purple-950 to-blue-950">
+      {/* Static Night Sky Background */}
+      <div className="fixed inset-0 z-0">
         {/* Stars */}
         {stars.map((star) => (
           <div
             key={star.id}
-            className="absolute rounded-full bg-white"
+            className={`absolute rounded-full ${star.brightness === 'bright' ? 'bg-purple-200' : 'bg-blue-200'}`}
             style={{
               left: `${star.x}%`,
               top: `${star.y}%`,
               width: `${star.size}px`,
               height: `${star.size}px`,
-              opacity: star.opacity,
-              animation: `twinkle 3s ease-in-out infinite ${star.twinkleDelay}s`
+              opacity: star.brightness === 'bright' ? 0.9 : 0.4,
+              animation: `dramaticTwinkle ${star.twinkleDelay}s ease-in-out infinite`
             }}
           />
         ))}
         
-        {/* Shooting stars */}
-        <div className="shooting-star" style={{ animationDelay: '2s' }} />
-        <div className="shooting-star" style={{ animationDelay: '8s' }} />
-        <div className="shooting-star" style={{ animationDelay: '15s' }} />
+        {/* Occasional shooting stars */}
+        <div className="shooting-star" style={{ animationDelay: '5s' }} />
+        <div className="shooting-star" style={{ animationDelay: '12s' }} />
+        <div className="shooting-star" style={{ animationDelay: '20s' }} />
       </div>
 
       {/* Mountain Range */}
-      <div className="fixed inset-0 z-1">
+      <div className="fixed inset-0 z-10">
         <svg className="w-full h-full" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice">
           <defs>
             <linearGradient id="mountainGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="rgb(15, 23, 42)" stopOpacity="0.9" />
-              <stop offset="50%" stopColor="rgb(30, 41, 59)" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="rgb(51, 65, 85)" stopOpacity="0.7" />
+              <stop offset="0%" stopColor="rgb(30, 27, 75)" stopOpacity="0.95" />
+              <stop offset="40%" stopColor="rgb(45, 55, 72)" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="rgb(26, 32, 44)" stopOpacity="0.85" />
             </linearGradient>
             
             <filter id="glow">
-              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
               <feMerge> 
                 <feMergeNode in="coloredBlur"/>
                 <feMergeNode in="SourceGraphic"/>
@@ -198,16 +199,16 @@ const JourneyViewNew = () => {
                 {/* Story tooltip above each point */}
                 {isActive && (
                   <foreignObject
-                    x={143 + (index * 143) - 120}
-                    y={520 - step.elevation * 3 - 120}
-                    width="240"
-                    height="100"
+                    x={Math.max(20, Math.min(780, 143 + (index * 143) - 150))}
+                    y={Math.max(20, 520 - step.elevation * 3 - 140)}
+                    width="300"
+                    height="120"
                     className="animate-fade-in"
                   >
-                    <div className="bg-slate-800/90 backdrop-blur-sm rounded-lg p-3 border border-slate-600/50 text-white text-center shadow-xl">
-                      <div className="text-sm font-semibold mb-1" style={{ color: step.color }}>{step.title}</div>
-                      <div className="text-xs text-slate-300 mb-2">{step.period}</div>
-                      <div className="text-xs text-slate-200 leading-relaxed">{step.description}</div>
+                    <div className="bg-slate-800/95 backdrop-blur-md rounded-xl p-4 border border-purple-700/50 text-white shadow-2xl">
+                      <div className="text-lg font-bold mb-2 text-center" style={{ color: step.color }}>{step.title}</div>
+                      <div className="text-sm text-purple-300 mb-3 text-center font-medium">{step.period}</div>
+                      <div className="text-sm text-gray-300 leading-relaxed text-center">{step.description}</div>
                     </div>
                   </foreignObject>
                 )}
@@ -219,8 +220,8 @@ const JourneyViewNew = () => {
 
       {/* Quote at the end */}
       {currentStep === journeySteps.length - 1 && (
-        <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-20 max-w-2xl px-6 animate-fade-in">
-          <div className="bg-slate-800/80 backdrop-blur-md rounded-lg p-6 border border-slate-600/30 shadow-2xl text-center">
+        <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-30 max-w-2xl px-6 animate-fade-in">
+          <div className="bg-slate-800/90 backdrop-blur-md rounded-xl p-6 border border-purple-700/50 shadow-2xl text-center">
             <blockquote className="text-lg font-medium text-white leading-relaxed italic">
               "AI helped me bridge the gap between creativity and technology. 
               It showed me what a compelling experience <em className="text-purple-300">should</em> feel like — and how to build it."
@@ -230,10 +231,20 @@ const JourneyViewNew = () => {
         </div>
       )}
 
-      <style jsx>{`
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.2; }
-          50% { opacity: 1; }
+      <style>{`
+        @keyframes dramaticTwinkle {
+          0%, 95% { 
+            opacity: 0.1; 
+            transform: scale(1);
+          }
+          97% { 
+            opacity: 1; 
+            transform: scale(1.5);
+          }
+          100% { 
+            opacity: 0.1; 
+            transform: scale(1);
+          }
         }
         
         @keyframes fade-in {
@@ -249,36 +260,42 @@ const JourneyViewNew = () => {
           position: absolute;
           width: 2px;
           height: 2px;
-          background: white;
+          background: #A855F7;
           border-radius: 50%;
-          animation: shooting 8s linear infinite;
+          animation: shooting 12s linear infinite;
           opacity: 0;
+          top: 10%;
+          right: 100%;
         }
         
         @keyframes shooting {
           0% {
             opacity: 0;
-            transform: translate(100vw, 0) rotate(45deg);
+            transform: translate(0, 0) rotate(45deg);
           }
-          10% {
+          5% {
             opacity: 1;
           }
-          90% {
+          15% {
             opacity: 1;
+          }
+          20% {
+            opacity: 0;
+            transform: translate(-150vw, 150vh) rotate(45deg);
           }
           100% {
             opacity: 0;
-            transform: translate(-100px, 100px) rotate(45deg);
+            transform: translate(-150vw, 150vh) rotate(45deg);
           }
         }
         
         .shooting-star:before {
           content: '';
           position: absolute;
-          width: 50px;
+          width: 80px;
           height: 1px;
-          background: linear-gradient(to right, white, transparent);
-          transform: translateX(-50px) rotate(45deg);
+          background: linear-gradient(to right, #A855F7, transparent);
+          transform: translateX(-80px) rotate(45deg);
         }
       `}</style>
     </div>
